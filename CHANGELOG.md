@@ -3,6 +3,8 @@
 ## [Unreleased]
 (Please put an entry here in each PR)
 
+- Add GuardDuty service
+
 ## [0.33.1] - 2018-08-07
 
 - Fix `rusoto_mock` versions available
