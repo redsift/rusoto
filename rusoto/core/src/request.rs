@@ -301,6 +301,8 @@ pub struct HttpClient<C = HttpsConnector<HttpConnector>> {
 
 impl HttpClient {
     /// Create a tls-enabled http client.
+    /// Returns with an error if the native TLS implementation can't be used.
+    #[cfg(feature = "native-tls")]
     pub fn new() -> Result<Self, TlsError> {
         let connector = match HttpsConnector::new(4) {
             Ok(connector) => connector,
@@ -312,6 +314,13 @@ impl HttpClient {
         };
 
         Ok(Self::from_connector(connector))
+    }
+
+    /// Create a tls-enabled http client.
+    /// Rustls can't fail with an error.
+    #[cfg(feature = "rustls")]
+    pub fn new() -> Result<Self, TlsError> {
+        Ok(Self::from_connector(HttpsConnector::new(4)))
     }
 }
 

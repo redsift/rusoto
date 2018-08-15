@@ -13,7 +13,10 @@ extern crate dirs;
 #[macro_use]
 extern crate futures;
 extern crate hyper;
+#[cfg(feature = "native-tls")]
 extern crate hyper_tls;
+#[cfg(feature = "rustls")]
+extern crate hyper_rustls as hyper_tls;
 extern crate regex;
 extern crate serde_json;
 extern crate tokio_timer;
